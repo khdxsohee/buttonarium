@@ -57,7 +57,7 @@ Copy the entire CSS block from the `<style id="kit-css">` tag in the repository,
 ```
 
 ### Step 2: Copy a Specimen
-Visit the [live showcase](#) (or open `index.html` locally). Hover over any button specimen and click the yellow **COPY** button. The exact HTML is now in your clipboard.
+Visit the [live showcase](http://khdxsohee.web.app/projects/buttonarium.html) (or open `index.html` locally). Hover over any button specimen and click the yellow **COPY** button. The exact HTML is now in your clipboard.
 
 ### Step 3: Paste & Ship
 Paste the HTML directly into your markup. Every button uses a base class `.bn` combined with a specific variant class.
