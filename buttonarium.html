@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUTTONARIUM — 122 Copy-Paste Buttons · Pure HTML + CSS</title>
+<meta name="description" content="Buttonarium: a specimen library of 122 copy-paste buttons. Pure HTML + CSS, zero dependencies.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔘</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ═══════════ PAGE CHROME (showcase styling only — NOT needed for the buttons) ═══════════ -->
+<style>
+:root{--ink:#171a1f;--paper:#f0f1ea;--yellow:#ffd23f;--red:#e5484d;--blue:#2f6bff}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);background-image:radial-gradient(#cdcec2 1.1px,transparent 1.2px);background-size:22px 22px;color:var(--ink);font-family:'IBM Plex Sans',sans-serif}
+::selection{background:var(--yellow)}
+button{font-family:inherit}
+
+.tape{background:var(--ink);overflow:hidden}
+.tape-track{display:flex;width:max-content;animation:bn-tape 38s linear infinite}
+.tape:hover .tape-track{animation-play-state:paused}
+.tape-half{display:flex;align-items:center;gap:14px;padding:13px 7px}
+.tape .bn{pointer-events:none;font-size:13px;padding:9px 16px}
+.tape .bn-line-ink{border-color:#fff;color:#fff}
+@keyframes bn-tape{to{transform:translateX(-50%)}}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:16px clamp(16px,4vw,48px);border-bottom:3px solid var(--ink)}
+.logo{font-family:'Archivo Black';font-size:24px;letter-spacing:1px}
+.logo sup{font:600 10px 'IBM Plex Mono';background:var(--ink);color:var(--yellow);padding:3px 6px;vertical-align:super;margin-left:6px}
+.top-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.repo-hint{font:500 12px 'IBM Plex Mono';border:2px dashed var(--ink);padding:8px 12px;background:#fff}
+
+.mast{display:grid;grid-template-columns:1.35fr .9fr;gap:44px;align-items:center;max-width:1280px;margin:0 auto;padding:58px clamp(16px,4vw,48px) 66px}
+.mast>*{animation:bn-rise .6s both}
+.mast>*:nth-child(2){animation-delay:.12s}
+.kicker{font:600 13px 'IBM Plex Mono';letter-spacing:3px;text-transform:uppercase;display:inline-block;background:var(--ink);color:var(--yellow);padding:6px 12px;transform:rotate(-1deg)}
+.mast h1{font-family:'Archivo Black';font-size:clamp(46px,7.5vw,96px);line-height:.95;text-transform:uppercase;margin:18px 0 20px}
+.mark{background:var(--yellow);box-shadow:4px 4px 0 var(--ink);padding:0 12px;display:inline-block;transform:rotate(-1.5deg)}
+.mast p{max-width:54ch;font-size:17px;line-height:1.6}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.stat{font:600 12px 'IBM Plex Mono';border:2px solid var(--ink);background:#fff;padding:8px 12px;box-shadow:3px 3px 0 var(--ink)}
+.stat b{color:var(--red)}
+.press-zone{justify-self:center;text-align:center;position:relative}
+.mega{font-family:'Archivo Black';font-size:26px;padding:30px 54px;background:var(--yellow);border:4px solid var(--ink);border-radius:18px;box-shadow:10px 10px 0 var(--ink);cursor:pointer;transition:.12s}
+.mega:hover{transform:translate(-2px,-2px);box-shadow:12px 12px 0 var(--ink)}
+.mega:active{transform:translate(7px,7px);box-shadow:0 0 0 var(--ink)}
+.mega.pop{animation:bn-pop .35s ease}
+.press-note{font:500 13px 'IBM Plex Mono';margin-top:16px}
+.press-note b{background:var(--yellow);padding:2px 8px;border:2px solid var(--ink)}
+.sticker{position:absolute;top:-46px;right:-30px;width:92px;height:92px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;text-align:center;font:700 11px/1.3 'IBM Plex Mono';border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transform:rotate(12deg);animation:bn-wobble 3.2s ease-in-out infinite}
+
+.toc{max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 12px;display:flex;flex-wrap:wrap;gap:10px}
+.toc-chip{display:inline-flex;align-items:center;gap:8px;font:600 12.5px 'IBM Plex Mono';text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--ink);padding:8px 12px;box-shadow:3px 3px 0 var(--ink);transition:.15s}
+.toc-chip:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);background:var(--yellow)}
+.toc-chip i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink)}
+.toc-chip span{color:#8a8d94}
+
+main{max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+section.family{padding:54px 0 8px;scroll-margin-top:80px}
+.fam-head{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;border-bottom:3px solid var(--ink);padding-bottom:14px;margin-bottom:26px}
+.idx{font-family:'Archivo Black';font-size:52px;color:var(--yellow);text-shadow:3px 3px 0 var(--ink);line-height:1}
+.fam-head h2{font-family:'Archivo Black';font-size:clamp(22px,3vw,30px);text-transform:uppercase}
+.count{font:600 12px 'IBM Plex Mono';background:var(--ink);color:#fff;padding:4px 10px;border-radius:99px}
+.fam-desc{width:100%;font-size:14px;color:#5b5f66;margin-top:2px}
+
+.panel{border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:26px;background:#fff}
+.panel-dark{background:#0d0f15;border-color:#000;box-shadow:8px 8px 0 var(--yellow)}
+.panel-glass{background:linear-gradient(115deg,#5b7cff,#b06ab3,#ff8a5c)}
+.panel-neu{background:#e4e8ef}
+.panel-dark .spec{background:#151922;border-color:#2b3240;box-shadow:4px 4px 0 #000}
+.panel-dark .stage{background:#0f1219;background-image:radial-gradient(#232a38 1px,transparent 1.2px);background-size:16px 16px;border-color:#2b3240}
+.panel-dark .spec-meta{border-color:#2b3240}
+.panel-dark .spec-id{color:#67718a}
+.panel-dark .spec-name{color:#e6e9f0}
+.panel-glass .spec{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.65);box-shadow:4px 4px 0 rgba(0,0,0,.22)}
+.panel-glass .stage{background:transparent;border-color:rgba(255,255,255,.45)}
+.panel-glass .spec-meta{border-color:rgba(255,255,255,.45)}
+.panel-glass .spec-id{color:rgba(255,255,255,.75)}
+.panel-glass .spec-name{color:#fff}
+.panel-glass .copy{border-color:#3c2f14;box-shadow:2px 2px 0 rgba(0,0,0,.35)}
+.panel-neu .spec{background:#e4e8ef;border-color:#c8d0dd;box-shadow:4px 4px 0 #c8d0dd}
+.panel-neu .stage{background:#e4e8ef}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:18px;padding-bottom:26px}
+.spec{background:#fff;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+.spec:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.stage{flex:1;min-height:112px;display:grid;place-items:center;padding:22px 14px;border-bottom:2px solid var(--ink);background-image:radial-gradient(#e2e4da 1px,transparent 1.2px);background-size:14px 14px}
+.spec-meta{display:flex;align-items:center;gap:8px;padding:9px 10px}
+.spec-id{font:600 10px 'IBM Plex Mono';color:#8a8d94;letter-spacing:.5px}
+.spec-name{flex:1;font:600 11.5px 'IBM Plex Mono';white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.copy{font:700 10.5px 'IBM Plex Mono';letter-spacing:1px;padding:7px 10px;border:2px solid var(--ink);background:var(--yellow);cursor:pointer;box-shadow:2px 2px 0 var(--ink);transition:.12s}
+.copy:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.copy:active{transform:translate(1px,1px);box-shadow:0 0 0 var(--ink)}
+.copy.done{background:#7ce38b}
+
+.howto{margin:64px 0 0;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:#fff;padding:34px}
+.howto h2{font-family:'Archivo Black';text-transform:uppercase;font-size:26px;margin-bottom:22px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.step{border:2px solid var(--ink);padding:18px;background:var(--paper)}
+.step b{display:block;font:600 12px 'IBM Plex Mono';margin-bottom:8px;background:var(--yellow);border:2px solid var(--ink);width:max-content;padding:3px 8px}
+.step p{font-size:14px;line-height:1.55}
+.note{margin-top:18px;font:500 13px/1.6 'IBM Plex Mono';border:2px dashed var(--ink);padding:12px 14px;background:#fffbe8}
+
+footer{margin-top:70px;background:var(--ink);color:#e8e9ee;padding:44px clamp(16px,4vw,48px)}
+.foot-grid{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.foot-logo{font-family:'Archivo Black';font-size:22px;color:var(--yellow)}
+footer pre{font:500 12px/1.8 'IBM Plex Mono';background:#000;border:1px solid #3a3f4a;padding:14px 16px;overflow:auto;color:#b9ffc2}
+footer p{font-size:13px;color:#9aa0ab;margin-top:12px}
+
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,90px);background:var(--ink);color:var(--yellow);font:600 13px 'IBM Plex Mono';padding:13px 22px;border:2px solid var(--yellow);box-shadow:5px 5px 0 rgba(0,0,0,.35);transition:transform .3s ease;z-index:99}
+#toast.show{transform:translate(-50%,0)}
+
+@keyframes bn-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes bn-pop{0%{transform:scale(1)}40%{transform:scale(1.05) rotate(-1deg)}100%{transform:scale(1)}}
+@keyframes bn-wobble{0%,100%{transform:rotate(10deg)}50%{transform:rotate(16deg)}}
+@media(max-width:900px){.mast{grid-template-columns:1fr}.press-zone{justify-self:start;margin-top:10px}.sticker{right:8px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     BUTTONARIUM · BUTTON KIT CSS
+     Copy this whole block for your own project (or use COPY FULL CSS).
+     Every button needs the base class:  class="bn  +  variant class"
+═══════════════════════════════════════════════════════════════════ -->
+<style id="kit-css">
+/* ── BUTTONARIUM v1.0 ── base ─────────────────────────────── */
+.bn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font:600 15px/1 'IBM Plex Sans',sans-serif;padding:12px 22px;border:0;border-radius:10px;
+  background:#e2e4dc;color:#171a1f;cursor:pointer;white-space:nowrap;text-decoration:none;
+  transition:transform .15s ease,box-shadow .15s ease,background .2s ease,color .2s ease,border-color .2s ease,filter .2s ease}
+.bn:active{transform:translateY(1px)}
+.bn:focus-visible{outline:2px solid #171a1f;outline-offset:3px}
+.bn svg{width:18px;height:18px;flex:none}
+.bn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+@keyframes bn-spin{to{transform:rotate(360deg)}}
+@keyframes bn-ring{0%{box-shadow:0 0 0 0 var(--ring,rgba(229,72,77,.5))}100%{box-shadow:0 0 0 14px rgba(0,0,0,0)}}
+
+/* ── 01 · SOLID ESSENTIALS ─────────────────────────────────── */
+.bn-solid-primary{background:#2563eb;color:#fff}.bn-solid-primary:hover{background:#1d4fd8;transform:translateY(-1px);box-shadow:0 8px 18px -8px rgba(37,99,235,.8)}
+.bn-solid-success{background:#16a34a;color:#fff}.bn-solid-success:hover{background:#15803d;transform:translateY(-1px)}
+.bn-solid-danger{background:#dc2626;color:#fff}.bn-solid-danger:hover{background:#b91c1c;transform:translateY(-1px)}
+.bn-solid-warning{background:#f59e0b;color:#171a1f}.bn-solid-warning:hover{background:#d97706;transform:translateY(-1px)}
+.bn-solid-info{background:#0891b2;color:#fff}.bn-solid-info:hover{background:#0e7490;transform:translateY(-1px)}
+.bn-solid-ink{background:#171a1f;color:#fff}.bn-solid-ink:hover{background:#30343c;transform:translateY(-1px)}
+.bn-solid-paper{background:#fff;color:#171a1f;border:2px solid #171a1f}.bn-solid-paper:hover{background:#171a1f;color:#fff}
+.bn-solid-plum{background:#7c3aed;color:#fff}.bn-solid-plum:hover{background:#6d28d9;transform:translateY(-1px)}
+.bn-solid-teal{background:#0d9488;color:#fff}.bn-solid-teal:hover{background:#0f766e;transform:translateY(-1px)}
+.bn-solid-orange{background:#ea580c;color:#fff}.bn-solid-orange:hover{background:#c2410c;transform:translateY(-1px)}
+.bn-solid-pink{background:#db2777;color:#fff}.bn-solid-pink:hover{background:#be185d;transform:translateY(-1px)}
+.bn-solid-slate{background:#475569;color:#fff}.bn-solid-slate:hover{background:#334155;transform:translateY(-1px)}
+
+/* ── 02 · OUTLINE & GHOST ──────────────────────────────────── */
+.bn-line-blue{background:transparent;border:2px solid #2563eb;color:#2563eb}.bn-line-blue:hover{background:#2563eb;color:#fff}
+.bn-line-ink{background:transparent;border:2px solid #171a1f;color:#171a1f}.bn-line-ink:hover{background:#171a1f;color:#fff}
+.bn-line-danger{background:transparent;border:2px solid #dc2626;color:#dc2626}.bn-line-danger:hover{background:#dc2626;color:#fff}
+.bn-ghost{background:transparent;color:#3f444d}.bn-ghost:hover{background:#e3e4dd}
+.bn-ghost-blue{background:transparent;color:#2563eb}.bn-ghost-blue:hover{background:#dbe7ff}
+.bn-line-dash{background:transparent;border:2px dashed #171a1f;color:#171a1f;border-radius:12px}.bn-line-dash:hover{background:#ffd23f}
+.bn-line-double{background:transparent;border:4px double #171a1f;color:#171a1f;border-radius:6px}.bn-line-double:hover{background:#171a1f;color:#fff}
+.bn-line-bold{background:transparent;border:3px solid #171a1f;color:#171a1f;font-weight:700}.bn-line-bold:hover{transform:translateY(-2px);box-shadow:0 10px 18px -10px rgba(23,26,31,.6);background:#fff}
+
+/* ── 03 · GRADIENTS ────────────────────────────────────────── */
+.bn-grad-sunset,.bn-grad-ocean,.bn-grad-forest,.bn-grad-candy,.bn-grad-fire,.bn-grad-haze,.bn-grad-gold,.bn-grad-mint,.bn-grad-steel{color:#fff}
+.bn-grad-sunset{background:linear-gradient(90deg,#ff9966,#ff5e62)}
+.bn-grad-ocean{background:linear-gradient(90deg,#1d6ff0,#25c9e0)}
+.bn-grad-forest{background:linear-gradient(90deg,#11998e,#38ef7d);color:#0b2b1c}
+.bn-grad-candy{background:linear-gradient(90deg,#f472b6,#a78bfa)}
+.bn-grad-fire{background:linear-gradient(90deg,#f83600,#f9d423)}
+.bn-grad-haze{background:linear-gradient(90deg,#8b5cf6,#6366f1)}
+.bn-grad-gold{background:linear-gradient(90deg,#f7b733,#ffd75e);color:#3d2800}
+.bn-grad-mint{background:linear-gradient(90deg,#00b09b,#96fbc4);color:#0b3d2e}
+.bn-grad-steel{background:linear-gradient(135deg,#4b5563,#1f2937)}
+.bn-grad-sunset:hover,.bn-grad-ocean:hover,.bn-grad-candy:hover,.bn-grad-fire:hover,.bn-grad-haze:hover,.bn-grad-steel:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.bn-grad-forest:hover,.bn-grad-gold:hover,.bn-grad-mint:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.bn-grad-ring{border:3px solid transparent;color:#fff;background:linear-gradient(#171a1f,#171a1f) padding-box,linear-gradient(90deg,#ff5f6d,#ffc371,#47cf73,#38b6ff,#cb5eee,#ff5f6d) border-box;background-size:100% 100%,300% 100%}
+.bn-grad-ring:hover{animation:bn-flow 2.5s linear infinite}
+
+/* ── 04 · SOFT TONAL ───────────────────────────────────────── */
+.bn-soft-blue{background:#dbe7ff;color:#1e40af}.bn-soft-blue:hover{background:#c4d8ff}
+.bn-soft-green{background:#d7f3e0;color:#166534}.bn-soft-green:hover{background:#c1ecd0}
+.bn-soft-red{background:#fde0e0;color:#b91c1c}.bn-soft-red:hover{background:#fbcaca}
+.bn-soft-amber{background:#fdeecd;color:#92400e}.bn-soft-amber:hover{background:#fbe2ae}
+.bn-soft-violet{background:#ece1fd;color:#6d28d9}.bn-soft-violet:hover{background:#e0cdfb}
+.bn-soft-teal{background:#d3f1ef;color:#0f766e}.bn-soft-teal:hover{background:#bfe9e6}
+
+/* ── 05 · 3D PRESS ─────────────────────────────────────────── */
+.bn-3d-red,.bn-3d-green,.bn-3d-blue,.bn-3d-dark,.bn-3d-pink,.bn-3d-teal,.bn-3d-yellow,.bn-3d-pixel{border-radius:12px;font-weight:700}
+.bn-3d-red{background:#e5484d;color:#fff;box-shadow:0 6px 0 #a92e33}.bn-3d-red:active{transform:translateY(6px);box-shadow:0 0 0 #a92e33}
+.bn-3d-green{background:#22c55e;color:#08301a;box-shadow:0 6px 0 #15803d}.bn-3d-green:active{transform:translateY(6px);box-shadow:0 0 0 #15803d}
+.bn-3d-blue{background:#2f6bff;color:#fff;box-shadow:0 6px 0 #1e45c0}.bn-3d-blue:active{transform:translateY(6px);box-shadow:0 0 0 #1e45c0}
+.bn-3d-yellow{background:#ffd23f;color:#171a1f;border:3px solid #171a1f;box-shadow:0 6px 0 #171a1f}.bn-3d-yellow:active{transform:translateY(6px);box-shadow:0 0 0 #171a1f}
+.bn-3d-dark{background:#23262d;color:#fff;box-shadow:0 6px 0 #000}.bn-3d-dark:active{transform:translateY(6px);box-shadow:0 0 0 #000}
+.bn-3d-pink{background:#ec4899;color:#fff;box-shadow:0 6px 0 #9d2162}.bn-3d-pink:active{transform:translateY(6px);box-shadow:0 0 0 #9d2162}
+.bn-3d-teal{background:#14b8a6;color:#04332d;box-shadow:0 6px 0 #0f766e}.bn-3d-teal:active{transform:translateY(6px);box-shadow:0 0 0 #0f766e}
+.bn-3d-pixel{background:#fff;color:#171a1f;border:3px solid #171a1f;border-radius:0;box-shadow:6px 6px 0 #171a1f;font-family:'IBM Plex Mono',monospace}.bn-3d-pixel:active{transform:translate(6px,6px);box-shadow:0 0 0 #171a1f}
+
+/* ── 06 · NEUMORPH ─────────────────────────────────────────── */
+.bn-neu-raised,.bn-neu-convex,.bn-neu-round{background:#e4e8ef;color:#4c5566}
+.bn-neu-raised{border-radius:14px;box-shadow:7px 7px 14px #c3cad6,-7px -7px 14px #ffffff}.bn-neu-raised:hover{color:#171a1f}
+.bn-neu-raised:active{box-shadow:inset 5px 5px 10px #c3cad6,inset -5px -5px 10px #ffffff}
+.bn-neu-pressed{background:#e4e8ef;border-radius:14px;box-shadow:inset 6px 6px 12px #c3cad6,inset -6px -6px 12px #ffffff;color:#7a8496}
+.bn-neu-convex{border-radius:16px;background:linear-gradient(145deg,#f2f5fa,#d5dae3);box-shadow:6px 6px 12px #c3cad6,-6px -6px 12px #ffffff}
+.bn-neu-round{width:54px;height:54px;padding:0;border-radius:50%;box-shadow:6px 6px 12px #c3cad6,-6px -6px 12px #ffffff}.bn-neu-round:hover{color:#e5484d}
+
+/* ── 07 · GLASS ────────────────────────────────────────────── */
+.bn-glass,.bn-glass-dark,.bn-glass-glow,.bn-glass-pill,.bn-glass-teal{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.bn-glass{background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.55);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.18)}.bn-glass:hover{background:rgba(255,255,255,.34)}
+.bn-glass-dark{background:rgba(15,17,22,.45);border:1.5px solid rgba(255,255,255,.28);color:#fff}.bn-glass-dark:hover{background:rgba(15,17,22,.65)}
+.bn-glass-glow{background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.5);color:#fff;box-shadow:0 0 18px rgba(255,255,255,.35)}.bn-glass-glow:hover{box-shadow:0 0 30px rgba(255,255,255,.55)}
+.bn-glass-pill{background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.6);color:#fff;border-radius:999px}.bn-glass-pill:hover{background:rgba(255,255,255,.4)}
+.bn-glass-teal{background:rgba(13,148,136,.35);border:1.5px solid rgba(255,255,255,.45);color:#fff}.bn-glass-teal:hover{background:rgba(13,148,136,.55)}
+
+/* ── 08 · NEON ─────────────────────────────────────────────── */
+.bn-neon-cyan,.bn-neon-pink,.bn-neon-green,.bn-neon-yellow,.bn-neon-violet,.bn-neon-pulse{background:transparent;border:2px solid var(--c);color:var(--c);text-shadow:0 0 8px var(--c);box-shadow:0 0 14px -2px var(--c),inset 0 0 10px -6px var(--c)}
+.bn-neon-cyan{--c:#22d3ee}.bn-neon-pink{--c:#ff4ecd}.bn-neon-green{--c:#39ff88}.bn-neon-yellow{--c:#ffe93b}.bn-neon-violet{--c:#a78bfa}
+.bn-neon-cyan:hover,.bn-neon-pink:hover,.bn-neon-green:hover,.bn-neon-yellow:hover,.bn-neon-violet:hover{background:var(--c);color:#0b0d12;text-shadow:none;box-shadow:0 0 28px var(--c)}
+.bn-neon-pulse{--c:#22d3ee;animation:bn-ring 1.8s infinite;--ring:rgba(34,211,238,.45)}
+.bn-neon-tube{background:#ff4ecd;color:#1c0316;border-radius:999px;font-weight:700;box-shadow:0 0 18px #ff4ecd,0 0 52px -6px #ff4ecd}.bn-neon-tube:hover{filter:brightness(1.12)}
+
+/* ── 09 · BRUTALIST ────────────────────────────────────────── */
+.bn-brut-black,.bn-brut-yellow,.bn-brut-white,.bn-brut-pink,.bn-brut-shift,.bn-brut-frame,.bn-brut-wide,.bn-brut-stamp{border:3px solid #171a1f;box-shadow:5px 5px 0 #171a1f;border-radius:4px;font-weight:700}
+.bn-brut-black{background:#171a1f;color:#ffd23f}.bn-brut-black:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #171a1f}
+.bn-brut-yellow{background:#ffd23f;color:#171a1f}.bn-brut-yellow:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #171a1f}
+.bn-brut-white{background:#fff;color:#171a1f}.bn-brut-white:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #171a1f}
+.bn-brut-pink{background:#ff90e8;color:#171a1f}.bn-brut-pink:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #171a1f}
+.bn-brut-shift{background:#90e0ff;color:#171a1f}.bn-brut-shift:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #171a1f}
+.bn-brut-frame{background:#fff;color:#171a1f;outline:2px solid #171a1f;outline-offset:3px}.bn-brut-frame:hover{background:#ffd23f}
+.bn-brut-wide{background:#fff;color:#171a1f;padding:14px 36px;letter-spacing:3px;text-transform:uppercase;font-family:'Archivo Black',sans-serif;font-size:13px}.bn-brut-wide:hover{background:#171a1f;color:#fff}
+.bn-brut-stamp{background:#fff;border-style:dashed;box-shadow:none;color:#c22525;letter-spacing:2px;text-transform:uppercase}.bn-brut-stamp:hover{background:#ffd23f;color:#171a1f;transform:rotate(-2deg)}
+
+/* ── 10 · HOVER MOTION ─────────────────────────────────────── */
+.bn-hv-underline{background:transparent;color:#171a1f}
+.bn-hv-underline::after{content:'';position:absolute;left:12%;right:12%;bottom:7px;height:3px;background:#2563eb;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.bn-hv-underline:hover::after{transform:scaleX(1)}
+.bn-hv-sweep-x,.bn-hv-sweep-y{overflow:hidden;background:transparent;border:2px solid #171a1f;color:#171a1f;z-index:0}
+.bn-hv-sweep-x::before,.bn-hv-sweep-y::before{content:'';position:absolute;inset:-2px;background:#171a1f;z-index:-1;transition:transform .3s ease}
+.bn-hv-sweep-x::before{transform:translateX(-102%)}
+.bn-hv-sweep-y::before{transform:translateY(102%)}
+.bn-hv-sweep-x:hover,.bn-hv-sweep-y:hover{color:#fff}
+.bn-hv-sweep-x:hover::before{transform:translateX(0)}
+.bn-hv-sweep-y:hover::before{transform:translateY(0)}
+.bn-hv-shine{overflow:hidden;background:#171a1f;color:#fff}
+.bn-hv-shine::after{content:'';position:absolute;top:0;left:-80%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .5s ease}
+.bn-hv-shine:hover::after{left:135%}
+.bn-hv-arrow{background:#2563eb;color:#fff}.bn-hv-arrow svg{transition:transform .25s ease}.bn-hv-arrow:hover svg{transform:translateX(5px)}
+.bn-hv-draw{background:transparent;color:#171a1f;box-shadow:inset 0 0 0 1px rgba(23,26,31,.2)}
+.bn-hv-draw::before{content:'';position:absolute;top:0;left:0;width:0;height:0;border-top:2px solid #171a1f;border-left:2px solid #171a1f;transition:width .25s ease,height .25s ease .25s}
+.bn-hv-draw:hover::before{width:100%;height:100%}
+.bn-hv-tilt{background:#ffd23f;color:#171a1f;border:2px solid #171a1f}.bn-hv-tilt:hover{transform:skewX(-8deg) translateY(-2px)}
+.bn-hv-elastic{background:#7c3aed;color:#fff;transition:transform .35s cubic-bezier(.34,1.8,.64,1)}.bn-hv-elastic:hover{transform:scale(1.13)}
+.bn-hv-zoom{background:#0d9488;color:#fff}.bn-hv-zoom:hover{transform:scale(1.07);box-shadow:0 12px 22px -10px rgba(13,148,136,.8)}
+.bn-hv-swap{background:#fff;border:2px solid #171a1f;color:#171a1f}.bn-hv-swap:hover{background:#2563eb;border-color:#2563eb;color:#fff;transform:translateY(-2px)}
+.bn-hv-shake{background:#dc2626;color:#fff}.bn-hv-shake:hover{animation:bn-shake .4s ease}
+.bn-hv-orbit{background:#fff;border:2px solid #171a1f;color:#171a1f}
+.bn-hv-orbit::before{content:'';position:absolute;inset:-11px;border:2px dashed #171a1f;border-radius:999px;opacity:0;transform:scale(.85);transition:.25s ease}
+.bn-hv-orbit:hover::before{opacity:1;transform:none;animation:bn-spin 7s linear infinite}
+
+/* ── 11 · WITH ICONS ───────────────────────────────────────── */
+.bn-ic-download{background:#2563eb;color:#fff}.bn-ic-download:hover{background:#1d4fd8}
+.bn-ic-cart{background:#f59e0b;color:#171a1f}.bn-ic-cart:hover{background:#d97706}
+.bn-ic-heart{background:#fde0e0;color:#dc2626}.bn-ic-heart:hover{background:#dc2626;color:#fff}
+.bn-ic-trash{background:transparent;border:2px solid #dc2626;color:#dc2626}.bn-ic-trash:hover{background:#dc2626;color:#fff}
+.bn-ic-play{background:#171a1f;color:#fff;border-radius:999px}.bn-ic-play:hover{background:#e5484d}
+.bn-ic-send{background:#7c3aed;color:#fff}.bn-ic-send:hover{background:#6d28d9}
+.bn-ic-star{background:#fff;border:2px solid #171a1f;color:#171a1f}.bn-ic-star:hover{background:#ffd23f}
+.bn-ic-copy{background:#e2e4dc;color:#171a1f}.bn-ic-copy:hover{background:#d1d4c9}
+.bn-ic-check{background:#16a34a;color:#fff}.bn-ic-check:hover{background:#15803d}
+.bn-ic-next{background:#fff;border:2px solid #171a1f;color:#171a1f}.bn-ic-next:hover{background:#171a1f;color:#fff}.bn-ic-next:hover svg{transform:translateX(4px)}.bn-ic-next svg{transition:transform .2s ease}
+
+/* ── 12 · PILLS & SHAPES ───────────────────────────────────── */
+.bn-pill{background:#171a1f;color:#fff;border-radius:999px}.bn-pill:hover{background:#30343c;transform:translateY(-1px)}
+.bn-pill-line{background:transparent;border:2px solid #171a1f;color:#171a1f;border-radius:999px}.bn-pill-line:hover{background:#171a1f;color:#fff}
+.bn-square{width:46px;height:46px;padding:0;border-radius:12px;background:#2563eb;color:#fff;font-size:22px}.bn-square:hover{background:#1d4fd8;transform:rotate(90deg)}
+.bn-circle{width:50px;height:50px;padding:0;border-radius:50%;background:#e5484d;color:#fff}.bn-circle:hover{transform:scale(1.08)}
+.bn-capsule-dot{background:#fff;border:2px solid #171a1f;border-radius:999px;color:#171a1f}
+.bn-capsule-dot::before{content:'';width:9px;height:9px;border-radius:50%;background:#22c55e;animation:bn-dot 1.8s infinite}
+.bn-squircle{background:#7c3aed;color:#fff;border-radius:34%}.bn-squircle:hover{background:#6d28d9}
+.bn-tag{background:#ffd23f;color:#171a1f;border-radius:0 10px 10px 0;clip-path:polygon(9% 0,100% 0,100% 100%,9% 100%,0 50%);padding-left:30px;font-weight:700}.bn-tag:hover{background:#f7c400}
+.bn-arrow-shape{background:#171a1f;color:#fff;border-radius:0;clip-path:polygon(0 0,82% 0,100% 50%,82% 100%,0 100%);padding-right:34px}.bn-arrow-shape:hover{background:#2563eb}
+@keyframes bn-dot{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}100%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}
+
+/* ── 13 · STATES ───────────────────────────────────────────── */
+.bn-disabled-solid{background:#c4c7c0;color:#6b6f76}
+.bn-disabled-line{background:transparent;border:2px solid #c4c7c0;color:#9a9da3}
+.bn-loading{background:#2563eb;color:#fff;cursor:wait}
+.bn-loading::before,.bn-loading-line::before{content:'';width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:bn-spin .7s linear infinite}
+.bn-loading-line{background:transparent;border:2px solid #2563eb;color:#2563eb;cursor:wait}
+.bn-loading-line::before{border-color:rgba(37,99,235,.25);border-top-color:#2563eb}
+.bn-success-state{background:#16a34a;color:#fff}
+.bn-error-state{background:#dc2626;color:#fff}
+
+/* ── 14 · SOCIAL ───────────────────────────────────────────── */
+.bn-social{color:#fff;font-weight:600}
+.bn-social:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.bn-social svg{width:19px;height:19px}
+.bn-gh{background:#24292f}.bn-x{background:#000}.bn-yt{background:#ff0000}.bn-in{background:#0a66c2}
+.bn-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.bn-wa{background:#25d366}.bn-dc{background:#5865f2}.bn-dr{background:#ea4c89}
+
+/* ── 15 · SPECIAL FX ───────────────────────────────────────── */
+.bn-fx-ring{background:#e5484d;color:#fff;animation:bn-ring 1.8s infinite}
+.bn-fx-heartbeat{background:#dc2626;color:#fff;border-radius:999px;animation:bn-beat 1.3s infinite}
+.bn-fx-glitch{background:#171a1f;color:#fff;font-family:'IBM Plex Mono',monospace;letter-spacing:1px}
+.bn-fx-glitch::before,.bn-fx-glitch::after{content:attr(data-text);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#171a1f}
+.bn-fx-glitch::before{color:#22d3ee;animation:bn-gl-a 1.1s infinite steps(2)}
+.bn-fx-glitch::after{color:#ff3b6b;animation:bn-gl-b 1.3s infinite steps(2)}
+.bn-fx-flow{border:3px solid transparent;color:#fff;background:linear-gradient(#171a1f,#171a1f) padding-box,linear-gradient(90deg,#ff5f6d,#ffc371,#47cf73,#38b6ff,#cb5eee,#ff5f6d) border-box;background-size:100% 100%,300% 100%;animation:bn-flow 3s linear infinite}
+.bn-fx-dots{background:#171a1f;color:#fff;cursor:wait}
+.bn-fx-dots i{width:6px;height:6px;border-radius:50%;background:#fff;animation:bn-bounce 1s infinite}
+.bn-fx-dots i:nth-child(2){animation-delay:.15s}.bn-fx-dots i:nth-child(3){animation-delay:.3s}
+.bn-fx-shimmer{overflow:hidden;background:#7c3aed;color:#fff}
+.bn-fx-shimmer::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);animation:bn-shimmer 2s linear infinite}
+.bn-fx-pow{background:#ffd23f;color:#171a1f;border:3px solid #171a1f;box-shadow:5px 5px 0 #171a1f;font-family:'Archivo Black',sans-serif;transform:rotate(-2deg)}
+.bn-fx-pow:hover{transform:rotate(2deg) scale(1.06)}
+.bn-fx-flip{background:#0d9488;color:#fff;transition:transform .7s ease;transform-style:preserve-3d}
+.bn-fx-flip:hover{transform:rotateY(360deg)}
+.bn-fx-flicker{background:transparent;border:2px solid #ffe93b;color:#ffe93b;text-shadow:0 0 8px #ffe93b;box-shadow:0 0 16px -2px #ffe93b;animation:bn-flick 2.4s infinite}
+.bn-fx-hue{background:linear-gradient(90deg,#ff5f6d,#ffc371,#47cf73,#38b6ff);color:#fff;animation:bn-hue 4s linear infinite}
+@keyframes bn-flow{to{background-position:0 0,-300% 0}}
+@keyframes bn-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@keyframes bn-beat{0%,100%{transform:scale(1)}14%{transform:scale(1.1)}28%{transform:scale(1)}42%{transform:scale(1.12)}56%{transform:scale(1)}}
+@keyframes bn-bounce{0%,80%,100%{transform:translateY(0);opacity:.5}40%{transform:translateY(-6px);opacity:1}}
+@keyframes bn-shimmer{to{left:100%}}
+@keyframes bn-flick{0%,89%,93%,97%,100%{opacity:1}91%{opacity:.35}95%{opacity:.55}}
+@keyframes bn-hue{to{filter:hue-rotate(360deg)}}
+@keyframes bn-gl-a{0%,100%{clip-path:inset(20% 0 62% 0);transform:translate(-3px,-1px)}50%{clip-path:inset(8% 0 45% 0);transform:translate(2px,1px)}}
+@keyframes bn-gl-b{0%,100%{clip-path:inset(62% 0 12% 0);transform:translate(3px,1px)}50%{clip-path:inset(42% 0 30% 0);transform:translate(-2px,-1px)}}
+</style>
+<!-- ═══════════ end of BUTTON KIT CSS ═══════════ -->
+
+<!-- scrolling tape of live specimens -->
+<div class="tape" aria-hidden="true">
+  <div class="tape-track">
+    <div class="tape-half">
+      <button class="bn bn-solid-danger" tabindex="-1">Danger</button>
+      <button class="bn bn-grad-sunset" tabindex="-1">Sunset</button>
+      <button class="bn bn-3d-yellow" tabindex="-1">Chunky</button>
+      <button class="bn bn-brut-pink" tabindex="-1">BRUT</button>
+      <button class="bn bn-pill" tabindex="-1">Pill</button>
+      <button class="bn bn-soft-violet" tabindex="-1">Soft Violet</button>
+      <button class="bn bn-line-ink" tabindex="-1">Outline</button>
+      <button class="bn bn-neon-pink" tabindex="-1">Neon Pink</button>
+      <button class="bn bn-grad-ocean" tabindex="-1">Ocean</button>
+      <button class="bn bn-ic-play" tabindex="-1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</button>
+      <button class="bn bn-solid-success" tabindex="-1">Success</button>
+      <button class="bn bn-fx-ring" tabindex="-1">Pulse</button>
+    </div>
+    <div class="tape-half">
+      <button class="bn bn-solid-danger" tabindex="-1">Danger</button>
+      <button class="bn bn-grad-sunset" tabindex="-1">Sunset</button>
+      <button class="bn bn-3d-yellow" tabindex="-1">Chunky</button>
+      <button class="bn bn-brut-pink" tabindex="-1">BRUT</button>
+      <button class="bn bn-pill" tabindex="-1">Pill</button>
+      <button class="bn bn-soft-violet" tabindex="-1">Soft Violet</button>
+      <button class="bn bn-line-ink" tabindex="-1">Outline</button>
+      <button class="bn bn-neon-pink" tabindex="-1">Neon Pink</button>
+      <button class="bn bn-grad-ocean" tabindex="-1">Ocean</button>
+      <button class="bn bn-ic-play" tabindex="-1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</button>
+      <button class="bn bn-solid-success" tabindex="-1">Success</button>
+      <button class="bn bn-fx-ring" tabindex="-1">Pulse</button>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="logo">BUTTONARIUM<sup>v1.0</sup></div>
+  <div class="top-actions">
+    <span class="repo-hint">repo → github.com/khdxsohee/buttonarium</span>
+    <button class="bn bn-brut-yellow" id="copyAllCss" style="font-size:13px;padding:10px 18px">COPY FULL CSS ⧉</button>
+  </div>
+</header>
+
+<section class="mast">
+  <div>
+    <span class="kicker">122 specimens · 15 families · 0 dependencies</span>
+    <h1>BUTTON KIT<br><span class="mark">PRESERVED.</span></h1>
+    <p><strong>Buttonarium</strong> is a specimen library of <strong>122 copy-paste buttons</strong> built with pure HTML &amp; CSS. Hover any specimen, hit <b>COPY</b>, paste it into your project, done. No frameworks. No build step. No excuses.</p>
+    <div class="stats">
+      <span class="stat"><b>122</b> BUTTONS</span>
+      <span class="stat"><b>15</b> FAMILIES</span>
+      <span class="stat"><b>1</b> FILE</span>
+      <span class="stat"><b>0</b> LIBRARIES</span>
+    </div>
+  </div>
+  <div class="press-zone">
+    <div class="sticker">100%<br>HANDMADE<br>CSS</div>
+    <button class="mega" id="mega">PRESS ME</button>
+    <p class="press-note" id="megaCount">Pressed × 0 — not part of the kit, just showing off.</p>
+  </div>
+</section>
+
+<nav class="toc">
+  <a class="toc-chip" href="#f01"><i style="background:#2563eb"></i>01 Solid <span>12</span></a>
+  <a class="toc-chip" href="#f02"><i style="background:#fff"></i>02 Outline <span>8</span></a>
+  <a class="toc-chip" href="#f03"><i style="background:linear-gradient(90deg,#ff9966,#ff5e62)"></i>03 Gradients <span>10</span></a>
+  <a class="toc-chip" href="#f04"><i style="background:#c4d8ff"></i>04 Soft <span>6</span></a>
+  <a class="toc-chip" href="#f05"><i style="background:#e5484d"></i>05 3D Press <span>8</span></a>
+  <a class="toc-chip" href="#f06"><i style="background:#e4e8ef"></i>06 Neumorph <span>4</span></a>
+  <a class="toc-chip" href="#f07"><i style="background:rgba(255,255,255,.6)"></i>07 Glass <span>5</span></a>
+  <a class="toc-chip" href="#f08"><i style="background:#22d3ee"></i>08 Neon <span>7</span></a>
+  <a class="toc-chip" href="#f09"><i style="background:#ffd23f"></i>09 Brutalist <span>8</span></a>
+  <a class="toc-chip" href="#f10"><i style="background:#90e0ff"></i>10 Hover <span>12</span></a>
+  <a class="toc-chip" href="#f11"><i style="background:#7c3aed"></i>11 Icons <span>10</span></a>
+  <a class="toc-chip" href="#f12"><i style="background:#171a1f"></i>12 Shapes <span>8</span></a>
+  <a class="toc-chip" href="#f13"><i style="background:#c4c7c0"></i>13 States <span>6</span></a>
+  <a class="toc-chip" href="#f14"><i style="background:#24292f"></i>14 Social <span>8</span></a>
+  <a class="toc-chip" href="#f15"><i style="background:#ff4ecd"></i>15 FX <span>10</span></a>
+</nav>
+
+<main>
+
+<!-- ════ 01 · SOLID ESSENTIALS ════ -->
+<section class="family" id="f01">
+  <div class="fam-head"><span class="idx">01</span><h2>Solid Essentials</h2><span class="count">×12</span><p class="fam-desc">The workhorses. Flat fills, sharp hovers, ready for real UI.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-solid-primary">Primary</button></div><div class="spec-meta"><span class="spec-id">BTN-001</span><span class="spec-name">Solid Primary</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-success">Success</button></div><div class="spec-meta"><span class="spec-id">BTN-002</span><span class="spec-name">Solid Success</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-danger">Danger</button></div><div class="spec-meta"><span class="spec-id">BTN-003</span><span class="spec-name">Solid Danger</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-warning">Warning</button></div><div class="spec-meta"><span class="spec-id">BTN-004</span><span class="spec-name">Solid Warning</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-info">Info</button></div><div class="spec-meta"><span class="spec-id">BTN-005</span><span class="spec-name">Solid Info</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-ink">Ink Black</button></div><div class="spec-meta"><span class="spec-id">BTN-006</span><span class="spec-name">Solid Ink</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-paper">Paper</button></div><div class="spec-meta"><span class="spec-id">BTN-007</span><span class="spec-name">Solid Paper</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-plum">Plum</button></div><div class="spec-meta"><span class="spec-id">BTN-008</span><span class="spec-name">Solid Plum</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-teal">Teal</button></div><div class="spec-meta"><span class="spec-id">BTN-009</span><span class="spec-name">Solid Teal</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-orange">Orange</button></div><div class="spec-meta"><span class="spec-id">BTN-010</span><span class="spec-name">Solid Orange</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-pink">Pink</button></div><div class="spec-meta"><span class="spec-id">BTN-011</span><span class="spec-name">Solid Pink</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-solid-slate">Slate</button></div><div class="spec-meta"><span class="spec-id">BTN-012</span><span class="spec-name">Solid Slate</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 02 · OUTLINE & GHOST ════ -->
+<section class="family" id="f02">
+  <div class="fam-head"><span class="idx">02</span><h2>Outline &amp; Ghost</h2><span class="count">×8</span><p class="fam-desc">All shape, no weight. Quieter siblings for secondary actions.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-line-blue">Outline Blue</button></div><div class="spec-meta"><span class="spec-id">BTN-013</span><span class="spec-name">Line Blue</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-line-ink">Outline Ink</button></div><div class="spec-meta"><span class="spec-id">BTN-014</span><span class="spec-name">Line Ink</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-line-danger">Outline Danger</button></div><div class="spec-meta"><span class="spec-id">BTN-015</span><span class="spec-name">Line Danger</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ghost">Ghost Gray</button></div><div class="spec-meta"><span class="spec-id">BTN-016</span><span class="spec-name">Ghost Gray</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ghost-blue">Ghost Blue</button></div><div class="spec-meta"><span class="spec-id">BTN-017</span><span class="spec-name">Ghost Blue</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-line-dash">Dashed</button></div><div class="spec-meta"><span class="spec-id">BTN-018</span><span class="spec-name">Dashed Border</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-line-double">Double Border</button></div><div class="spec-meta"><span class="spec-id">BTN-019</span><span class="spec-name">Double Border</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-line-bold">Bold Outline</button></div><div class="spec-meta"><span class="spec-id">BTN-020</span><span class="spec-name">Bold Outline</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 03 · GRADIENTS ════ -->
+<section class="family" id="f03">
+  <div class="fam-head"><span class="idx">03</span><h2>Gradients</h2><span class="count">×10</span><p class="fam-desc">Color in motion. From calm oceans to full fireworks.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-grad-sunset">Sunset</button></div><div class="spec-meta"><span class="spec-id">BTN-021</span><span class="spec-name">Gradient Sunset</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-ocean">Ocean</button></div><div class="spec-meta"><span class="spec-id">BTN-022</span><span class="spec-name">Gradient Ocean</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-forest">Forest</button></div><div class="spec-meta"><span class="spec-id">BTN-023</span><span class="spec-name">Gradient Forest</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-candy">Candy</button></div><div class="spec-meta"><span class="spec-id">BTN-024</span><span class="spec-name">Gradient Candy</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-fire">Fire</button></div><div class="spec-meta"><span class="spec-id">BTN-025</span><span class="spec-name">Gradient Fire</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-haze">Purple Haze</button></div><div class="spec-meta"><span class="spec-id">BTN-026</span><span class="spec-name">Gradient Haze</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-gold">Gold Rush</button></div><div class="spec-meta"><span class="spec-id">BTN-027</span><span class="spec-name">Gradient Gold</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-mint">Mint Breeze</button></div><div class="spec-meta"><span class="spec-id">BTN-028</span><span class="spec-name">Gradient Mint</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-steel">Steel</button></div><div class="spec-meta"><span class="spec-id">BTN-029</span><span class="spec-name">Gradient Steel</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-grad-ring">Rainbow Ring</button></div><div class="spec-meta"><span class="spec-id">BTN-030</span><span class="spec-name">Rainbow Ring</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 04 · SOFT TONAL ════ -->
+<section class="family" id="f04">
+  <div class="fam-head"><span class="idx">04</span><h2>Soft Tonal</h2><span class="count">×6</span><p class="fam-desc">Quiet tints for calm interfaces. Low volume, high polish.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-soft-blue">Soft Blue</button></div><div class="spec-meta"><span class="spec-id">BTN-031</span><span class="spec-name">Soft Blue</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-soft-green">Soft Green</button></div><div class="spec-meta"><span class="spec-id">BTN-032</span><span class="spec-name">Soft Green</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-soft-red">Soft Red</button></div><div class="spec-meta"><span class="spec-id">BTN-033</span><span class="spec-name">Soft Red</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-soft-amber">Soft Amber</button></div><div class="spec-meta"><span class="spec-id">BTN-034</span><span class="spec-name">Soft Amber</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-soft-violet">Soft Violet</button></div><div class="spec-meta"><span class="spec-id">BTN-035</span><span class="spec-name">Soft Violet</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-soft-teal">Soft Teal</button></div><div class="spec-meta"><span class="spec-id">BTN-036</span><span class="spec-name">Soft Teal</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 05 · 3D PRESS ════ -->
+<section class="family" id="f05">
+  <div class="fam-head"><span class="idx">05</span><h2>3D Press</h2><span class="count">×8</span><p class="fam-desc">Push them. They push back. Satisfying tactile depth.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-3d-red">Arcade Red</button></div><div class="spec-meta"><span class="spec-id">BTN-037</span><span class="spec-name">3D Arcade Red</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-3d-green">Arcade Green</button></div><div class="spec-meta"><span class="spec-id">BTN-038</span><span class="spec-name">3D Arcade Green</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-3d-blue">Arcade Blue</button></div><div class="spec-meta"><span class="spec-id">BTN-039</span><span class="spec-name">3D Arcade Blue</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-3d-yellow">Chunky</button></div><div class="spec-meta"><span class="spec-id">BTN-040</span><span class="spec-name">3D Chunky</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-3d-dark">Deep Dark</button></div><div class="spec-meta"><span class="spec-id">BTN-041</span><span class="spec-name">3D Dark</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-3d-pink">Bubblegum</button></div><div class="spec-meta"><span class="spec-id">BTN-042</span><span class="spec-name">3D Pink</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-3d-teal">Deep Teal</button></div><div class="spec-meta"><span class="spec-id">BTN-043</span><span class="spec-name">3D Teal</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-3d-pixel">PIXEL</button></div><div class="spec-meta"><span class="spec-id">BTN-044</span><span class="spec-name">Pixel Press</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 06 · NEUMORPH ════ -->
+<section class="family" id="f06">
+  <div class="fam-head"><span class="idx">06</span><h2>Neumorph</h2><span class="count">×4</span><p class="fam-desc">Soft plastic, extruded from the page itself.</p></div>
+  <div class="panel panel-neu"><div class="grid" style="padding-bottom:0">
+    <div class="spec"><div class="stage"><button class="bn bn-neu-raised">Raised</button></div><div class="spec-meta"><span class="spec-id">BTN-045</span><span class="spec-name">Neu Raised</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neu-pressed">Pressed</button></div><div class="spec-meta"><span class="spec-id">BTN-046</span><span class="spec-name">Neu Pressed</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neu-convex">Convex</button></div><div class="spec-meta"><span class="spec-id">BTN-047</span><span class="spec-name">Neu Convex</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neu-round"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v9"/><path d="M5.6 6.4a8 8 0 1 0 12.8 0"/></svg></button></div><div class="spec-meta"><span class="spec-id">BTN-048</span><span class="spec-name">Neu Power</span><button class="copy">COPY</button></div></div>
+  </div></div>
+</section>
+
+<!-- ════ 07 · GLASS ════ -->
+<section class="family" id="f07">
+  <div class="fam-head"><span class="idx">07</span><h2>Glass</h2><span class="count">×5</span><p class="fam-desc">Frosted panes — they look best sitting on top of color.</p></div>
+  <div class="panel panel-glass"><div class="grid" style="padding-bottom:0">
+    <div class="spec"><div class="stage"><button class="bn bn-glass">Frosted</button></div><div class="spec-meta"><span class="spec-id">BTN-049</span><span class="spec-name">Glass Light</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-glass-dark">Smoke</button></div><div class="spec-meta"><span class="spec-id">BTN-050</span><span class="spec-name">Glass Dark</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-glass-glow">Glow Edge</button></div><div class="spec-meta"><span class="spec-id">BTN-051</span><span class="spec-name">Glass Glow</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-glass-pill">Glass Pill</button></div><div class="spec-meta"><span class="spec-id">BTN-052</span><span class="spec-name">Glass Pill</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-glass-teal">Sea Glass</button></div><div class="spec-meta"><span class="spec-id">BTN-053</span><span class="spec-name">Glass Teal</span><button class="copy">COPY</button></div></div>
+  </div></div>
+</section>
+
+<!-- ════ 08 · NEON ════ -->
+<section class="family" id="f08">
+  <div class="fam-head"><span class="idx">08</span><h2>Neon</h2><span class="count">×7</span><p class="fam-desc">For dark rooms and loud ideas.</p></div>
+  <div class="panel panel-dark"><div class="grid" style="padding-bottom:0">
+    <div class="spec"><div class="stage"><button class="bn bn-neon-cyan">Neon Cyan</button></div><div class="spec-meta"><span class="spec-id">BTN-054</span><span class="spec-name">Neon Cyan</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neon-pink">Neon Pink</button></div><div class="spec-meta"><span class="spec-id">BTN-055</span><span class="spec-name">Neon Pink</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neon-green">Neon Green</button></div><div class="spec-meta"><span class="spec-id">BTN-056</span><span class="spec-name">Neon Green</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neon-yellow">Neon Yellow</button></div><div class="spec-meta"><span class="spec-id">BTN-057</span><span class="spec-name">Neon Yellow</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neon-violet">Neon Violet</button></div><div class="spec-meta"><span class="spec-id">BTN-058</span><span class="spec-name">Neon Violet</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neon-pulse">Pulse</button></div><div class="spec-meta"><span class="spec-id">BTN-059</span><span class="spec-name">Neon Pulse</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-neon-tube">Neon Tube</button></div><div class="spec-meta"><span class="spec-id">BTN-060</span><span class="spec-name">Neon Tube</span><button class="copy">COPY</button></div></div>
+  </div></div>
+</section>
+
+<!-- ════ 09 · BRUTALIST ════ -->
+<section class="family" id="f09">
+  <div class="fam-head"><span class="idx">09</span><h2>Brutalist</h2><span class="count">×8</span><p class="fam-desc">Concrete borders. Hard shadows. Zero apologies.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-brut-black">BRUT</button></div><div class="spec-meta"><span class="spec-id">BTN-061</span><span class="spec-name">Brut Black</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-brut-yellow">DO IT</button></div><div class="spec-meta"><span class="spec-id">BTN-062</span><span class="spec-name">Brut Yellow</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-brut-white">RAW</button></div><div class="spec-meta"><span class="spec-id">BTN-063</span><span class="spec-name">Brut White</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-brut-pink">LOUD</button></div><div class="spec-meta"><span class="spec-id">BTN-064</span><span class="spec-name">Brut Pink</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-brut-shift">SHIFT ME</button></div><div class="spec-meta"><span class="spec-id">BTN-065</span><span class="spec-name">Brut Shift</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-brut-frame">FRAMED</button></div><div class="spec-meta"><span class="spec-id">BTN-066</span><span class="spec-name">Brut Frame</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-brut-wide">WIDE</button></div><div class="spec-meta"><span class="spec-id">BTN-067</span><span class="spec-name">Brut Wide</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-brut-stamp">APPROVED</button></div><div class="spec-meta"><span class="spec-id">BTN-068</span><span class="spec-name">Brut Stamp</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 10 · HOVER MOTION ════ -->
+<section class="family" id="f10">
+  <div class="fam-head"><span class="idx">10</span><h2>Hover Motion</h2><span class="count">×12</span><p class="fam-desc">Move your cursor over them — that's the whole point.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-hv-underline">Underline</button></div><div class="spec-meta"><span class="spec-id">BTN-069</span><span class="spec-name">Underline Slide</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-sweep-x">Sweep Left</button></div><div class="spec-meta"><span class="spec-id">BTN-070</span><span class="spec-name">Sweep X</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-sweep-y">Sweep Up</button></div><div class="spec-meta"><span class="spec-id">BTN-071</span><span class="spec-name">Sweep Y</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-shine">Shine</button></div><div class="spec-meta"><span class="spec-id">BTN-072</span><span class="spec-name">Shine Sweep</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-arrow">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button></div><div class="spec-meta"><span class="spec-id">BTN-073</span><span class="spec-name">Arrow Slide</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-draw">Border Draw</button></div><div class="spec-meta"><span class="spec-id">BTN-074</span><span class="spec-name">Border Draw</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-tilt">Tilt</button></div><div class="spec-meta"><span class="spec-id">BTN-075</span><span class="spec-name">Tilt Skew</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-elastic">Elastic</button></div><div class="spec-meta"><span class="spec-id">BTN-076</span><span class="spec-name">Elastic Pop</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-zoom">Zoom</button></div><div class="spec-meta"><span class="spec-id">BTN-077</span><span class="spec-name">Zoom Lift</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-swap">Swap</button></div><div class="spec-meta"><span class="spec-id">BTN-078</span><span class="spec-name">Color Swap</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-shake">Don't Hover</button></div><div class="spec-meta"><span class="spec-id">BTN-079</span><span class="spec-name">Shake</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-hv-orbit">Orbit</button></div><div class="spec-meta"><span class="spec-id">BTN-080</span><span class="spec-name">Orbit Ring</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 11 · WITH ICONS ════ -->
+<section class="family" id="f11">
+  <div class="fam-head"><span class="idx">11</span><h2>With Icons</h2><span class="count">×10</span><p class="fam-desc">Words plus pictures. Inline SVG, no icon library.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-ic-download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>Download</button></div><div class="spec-meta"><span class="spec-id">BTN-081</span><span class="spec-name">Icon Download</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6"/></svg>Add to Cart</button></div><div class="spec-meta"><span class="spec-id">BTN-082</span><span class="spec-name">Icon Cart</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>Like</button></div><div class="spec-meta"><span class="spec-id">BTN-083</span><span class="spec-name">Icon Heart</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-trash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>Delete</button></div><div class="spec-meta"><span class="spec-id">BTN-084</span><span class="spec-name">Icon Trash</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play</button></div><div class="spec-meta"><span class="spec-id">BTN-085</span><span class="spec-name">Icon Play</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>Send</button></div><div class="spec-meta"><span class="spec-id">BTN-086</span><span class="spec-name">Icon Send</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>Favorite</button></div><div class="spec-meta"><span class="spec-id">BTN-087</span><span class="spec-name">Icon Star</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Duplicate</button></div><div class="spec-meta"><span class="spec-id">BTN-088</span><span class="spec-name">Icon Copy</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Confirm</button></div><div class="spec-meta"><span class="spec-id">BTN-089</span><span class="spec-name">Icon Check</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-ic-next">Next <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button></div><div class="spec-meta"><span class="spec-id">BTN-090</span><span class="spec-name">Icon Next</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 12 · PILLS & SHAPES ════ -->
+<section class="family" id="f12">
+  <div class="fam-head"><span class="idx">12</span><h2>Pills &amp; Shapes</h2><span class="count">×8</span><p class="fam-desc">Pills, squares, tags, arrows — geometry class.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-pill">Pill Solid</button></div><div class="spec-meta"><span class="spec-id">BTN-091</span><span class="spec-name">Pill Solid</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-pill-line">Pill Outline</button></div><div class="spec-meta"><span class="spec-id">BTN-092</span><span class="spec-name">Pill Outline</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-square" aria-label="Add">+</button></div><div class="spec-meta"><span class="spec-id">BTN-093</span><span class="spec-name">Square Add</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-circle" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></button></div><div class="spec-meta"><span class="spec-id">BTN-094</span><span class="spec-name">Circle Arrow</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-capsule-dot">Online</button></div><div class="spec-meta"><span class="spec-id">BTN-095</span><span class="spec-name">Capsule Status</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-squircle">Squircle</button></div><div class="spec-meta"><span class="spec-id">BTN-096</span><span class="spec-name">Squircle</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-tag">SALE</button></div><div class="spec-meta"><span class="spec-id">BTN-097</span><span class="spec-name">Tag Shape</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-arrow-shape">NEXT →</button></div><div class="spec-meta"><span class="spec-id">BTN-098</span><span class="spec-name">Arrow Shape</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 13 · STATES ════ -->
+<section class="family" id="f13">
+  <div class="fam-head"><span class="idx">13</span><h2>States</h2><span class="count">×6</span><p class="fam-desc">Disabled, loading, done, failed — the honest ones.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-disabled-solid" disabled>Disabled</button></div><div class="spec-meta"><span class="spec-id">BTN-099</span><span class="spec-name">Disabled Solid</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn btn-disabled-line" disabled>Disabled</button></div><div class="spec-meta"><span class="spec-id">BTN-100</span><span class="spec-name">Disabled Outline</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-loading">Saving…</button></div><div class="spec-meta"><span class="spec-id">BTN-101</span><span class="spec-name">Loading Solid</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-loading-line">Loading…</button></div><div class="spec-meta"><span class="spec-id">BTN-102</span><span class="spec-name">Loading Outline</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-success-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Saved</button></div><div class="spec-meta"><span class="spec-id">BTN-103</span><span class="spec-name">Success State</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-error-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>Failed</button></div><div class="spec-meta"><span class="spec-id">BTN-104</span><span class="spec-name">Error State</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 14 · SOCIAL ════ -->
+<section class="family" id="f14">
+  <div class="fam-head"><span class="idx">14</span><h2>Social</h2><span class="count">×8</span><p class="fam-desc">Brand colors, baked in. Ready to follow.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-gh"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.54-.02 2.78-.02 3.16 0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>GitHub</button></div><div class="spec-meta"><span class="spec-id">BTN-105</span><span class="spec-name">GitHub</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-x"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></svg>Post</button></div><div class="spec-meta"><span class="spec-id">BTN-106</span><span class="spec-name">X / Twitter</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-yt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a4.5 4.5 0 0 0-3.17-3.2C18.5 2.5 12 2.5 12 2.5s-6.5 0-8.33.49A4.5 4.5 0 0 0 .5 6.19 46.7 46.7 0 0 0 0 12a46.7 46.7 0 0 0 .5 5.81 4.5 4.5 0 0 0 3.17 3.2c1.83.49 8.33.49 8.33.49s6.5 0 8.33-.49a4.5 4.5 0 0 0 3.17-3.2A46.7 46.7 0 0 0 24 12a46.7 46.7 0 0 0-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg>Subscribe</button></div><div class="spec-meta"><span class="spec-id">BTN-107</span><span class="spec-name">YouTube</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-in"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>Connect</button></div><div class="spec-meta"><span class="spec-id">BTN-108</span><span class="spec-name">LinkedIn</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-ig"><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.6" cy="6.4" r="1.4" fill="currentColor"/></svg>Follow</button></div><div class="spec-meta"><span class="spec-id">BTN-109</span><span class="spec-name">Instagram</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.5A9.9 9.9 0 1 0 12.04 2Zm5.8 14.1c-.25.7-1.45 1.35-2 1.4-.55.1-1.2.15-1.95-.1-.45-.15-1-.35-1.7-.65-2.95-1.3-4.9-4.25-5.05-4.45-.15-.2-1.2-1.6-1.2-3.05 0-1.45.75-2.15 1-2.45.25-.3.55-.4.75-.4h.55c.2 0 .45-.05.7.5.25.6.85 2.05.9 2.2.05.15.1.3 0 .5-.1.2-.15.3-.3.5l-.45.5c-.15.15-.3.3-.15.6.15.3.75 1.2 1.6 1.95 1.05.95 1.95 1.25 2.25 1.4.3.15.45.1.6-.05.15-.15.65-.75.8-1 .15-.25.35-.2.6-.15.25.05 1.6.75 1.85.9.25.15.45.2.5.35.1.1.1.55-.15 1.2Z"/></svg>Chat</button></div><div class="spec-meta"><span class="spec-id">BTN-110</span><span class="spec-name">WhatsApp</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-dc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.55 1.1a15.6 15.6 0 0 0-5.1 0L8.9 4a16.9 16.9 0 0 0-4.2 1.3C2 9.2 1.4 13 1.7 16.7A17 17 0 0 0 6.9 19l1.05-1.7c-.6-.2-1.15-.5-1.7-.85l.4-.3c3.05 1.4 6.35 1.4 9.35 0l.4.3c-.55.35-1.1.65-1.7.85L15.75 19a17 17 0 0 0 5.2-2.3c.35-4.35-.85-8.05-3.65-11.4ZM8.7 14.3c-.95 0-1.7-.85-1.7-1.9s.75-1.9 1.7-1.9 1.7.85 1.7 1.9-.75 1.9-1.7 1.9Zm6.6 0c-.95 0-1.7-.85-1.7-1.9s.75-1.9 1.7-1.9 1.7.85 1.7 1.9-.75 1.9-1.7 1.9Z"/></svg>Join</button></div><div class="spec-meta"><span class="spec-id">BTN-111</span><span class="spec-name">Discord</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-social bn-dr"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 4.5c4.5 4 8 8.5 10.5 15M16.5 4c-2 4.5-6 8-13.5 9M3 15.5c5-2.5 11-2.5 17.5 1" fill="none" stroke="currentColor" stroke-width="2"/></svg>Dribbble</button></div><div class="spec-meta"><span class="spec-id">BTN-112</span><span class="spec-name">Dribbble</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- ════ 15 · SPECIAL FX ════ -->
+<section class="family" id="f15">
+  <div class="fam-head"><span class="idx">15</span><h2>Special FX</h2><span class="count">×10</span><p class="fam-desc">The show-offs. Pulse, glitch, shimmer, flip — pure CSS magic.</p></div>
+  <div class="grid">
+    <div class="spec"><div class="stage"><button class="bn bn-fx-ring">Alert</button></div><div class="spec-meta"><span class="spec-id">BTN-113</span><span class="spec-name">Pulse Ring</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-heartbeat">♥ Beat</button></div><div class="spec-meta"><span class="spec-id">BTN-114</span><span class="spec-name">Heartbeat</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-glitch" data-text="GLITCH">GLITCH</button></div><div class="spec-meta"><span class="spec-id">BTN-115</span><span class="spec-name">Glitch</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-flow">Flow Border</button></div><div class="spec-meta"><span class="spec-id">BTN-116</span><span class="spec-name">Flow Border</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-dots">Typing <i></i><i></i><i></i></button></div><div class="spec-meta"><span class="spec-id">BTN-117</span><span class="spec-name">Typing Dots</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-shimmer">Shimmer</button></div><div class="spec-meta"><span class="spec-id">BTN-118</span><span class="spec-name">Shimmer</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-pow">POW!</button></div><div class="spec-meta"><span class="spec-id">BTN-119</span><span class="spec-name">Comic Pow</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-flip">Flip Me</button></div><div class="spec-meta"><span class="spec-id">BTN-120</span><span class="spec-name">3D Flip</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-flicker">Flicker</button></div><div class="spec-meta"><span class="spec-id">BTN-121</span><span class="spec-name">Neon Flicker</span><button class="copy">COPY</button></div></div>
+    <div class="spec"><div class="stage"><button class="bn bn-fx-hue">Hue Shift</button></div><div class="spec-meta"><span class="spec-id">BTN-122</span><span class="spec-name">Hue Shift</span><button class="copy">COPY</button></div></div>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="howto">
+  <h2>How to use ⌁ 3 steps</h2>
+  <div class="steps">
+    <div class="step"><b>STEP 1 — COPY</b><p>Hover any specimen card and hit its yellow <strong>COPY</strong> button. The exact HTML of that button lands in your clipboard.</p></div>
+    <div class="step"><b>STEP 2 — PASTE</b><p>Drop it straight into your markup. Every button is a real <code>&lt;button&gt;</code> element with two classes: <code>bn</code> + a variant class.</p></div>
+    <div class="step"><b>STEP 3 — CSS ONCE</b><p>Hit <strong>COPY FULL CSS</strong> in the header and save it as <code>buttonarium.css</code>. Link it once — all 122 buttons work forever.</p></div>
+  </div>
+  <div class="note">⚠ Keep the base <strong>.bn</strong> class on every button — it carries the shared reset. Everything else is pure CSS. Works inside forms, navbars, cards, anywhere.</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">BUTTONARIUM by Khdxsohee</div>
+      <p>122 specimens · MIT license · free forever.<br>© 2026 — built with 1 file, 0 frameworks, and too many box-shadows.</p>
+    </div>
+    <div>
+      <pre>mkdir buttonarium && cd buttonarium
+# save this page as index.html
+git init
+git add .
+git commit -m "122 buttons, zero dependencies"
+git remote add origin github.com:khdxsohee/buttonarium.git</pre>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status">Copied!</div>
+
+<script>
+(function(){
+  var toast = document.getElementById('toast'), tTimer;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(tTimer);
+    tTimer = setTimeout(function(){ toast.classList.remove('show'); }, 1600);
+  }
+  function copyText(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function(res){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      ta.remove(); res();
+    });
+  }
+
+  // per-specimen copy
+  document.querySelectorAll('.spec .copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = btn.closest('.spec').querySelector('.stage .bn');
+      copyText(target.outerHTML).then(function(){
+        btn.classList.add('done'); btn.textContent = '✓ DONE';
+        showToast('✓ ' + target.className.replace('bn ','').toUpperCase() + ' copied — paste it anywhere');
+        setTimeout(function(){ btn.classList.remove('done'); btn.textContent = 'COPY'; }, 1400);
+      });
+    });
+  });
+
+  // copy full kit CSS
+  document.getElementById('copyAllCss').addEventListener('click', function(){
+    copyText(document.getElementById('kit-css').textContent.trim())
+      .then(function(){ showToast('✓ Full buttonarium.css copied (122 styles)'); });
+  });
+
+  // masthead mega press counter
+  var presses = 0,
+      mega = document.getElementById('mega'),
+      count = document.getElementById('megaCount');
+  mega.addEventListener('click', function(){
+    presses++;
+    count.innerHTML = 'Pressed × <b>' + presses + '</b> — not part of the kit, just showing off.';
+    mega.classList.remove('pop'); void mega.offsetWidth; mega.classList.add('pop');
+  });
+})();
+</script>
+</body>
+</html>
